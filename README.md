@@ -59,3 +59,9 @@ outputs: |
 ```
 
 With these settings we can create index on Elasticsearch to view our logs.
+
+# Notes
+With some issues, I couldn't have enough time to implement custom metrics for the application via promql client library.
+But the idea is once it is configured in the application code, we just need to scrape the metrics with Prometheus.
+
+For Grafana dashboards I used templates from their website. According to our needs, we can populate new dashboards by using Prometheus as our datasource.
