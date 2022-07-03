@@ -78,5 +78,5 @@ But the idea is once it is configured in the application code, we just need to s
 
 For Grafana dashboards I used templates from their website. According to our needs, we can populate new dashboards by using Prometheus as our datasource.
 
-Beta application is available at http://app-beta.ustundagsemih.com/api
+Beta application is available at http://app-beta.ustundagsemih.com/api \
 Prod application is available at http://app.ustundagsemih.com/api
