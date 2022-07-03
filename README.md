@@ -46,6 +46,8 @@ To build our image within Jenkis we can use the kaniko project. We need to provi
 
 In the Jenkinsfile we have different stages for building application, building docker image and deploying. Jenkins will spin up containers based on podTemplates specified in the Jenkinsfile. When deploying to Kubernetes, first it deploys to a different namespace named as beta. If app is running fine on that namespace, we can approve the pipeline and let it proceed to deploy to prod namespace. If we have 2 different clusters for beta and prod, we would first push the application to beta and then go with the prod.
 
+The pipeline is also configured for receiving github commits. Whenever a commit made to the app repository, pipeline will be automatically triggered.
+
 # Elasticsearch and Grafana
 To make fluent-bit send logs to elasticsearch, we need to edit outputs config as below.
 
@@ -75,3 +77,6 @@ With some issues, I couldn't have enough time to implement custom metrics for th
 But the idea is once it is configured in the application code, we just need to scrape the metrics with Prometheus.
 
 For Grafana dashboards I used templates from their website. According to our needs, we can populate new dashboards by using Prometheus as our datasource.
+
+Beta application is available at http://app-beta.ustundagsemih.com/api
+Prod application is available at http://app.ustundagsemih.com/api
