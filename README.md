@@ -5,6 +5,8 @@ To provision EC2 instances on AWS, kubespray provides a basic Terraform infrastr
 
 This will populate hosts file under /kubespray/inventory/hosts like below.
 
+![hosts](https://i.ibb.co/gRzf3RT/1.png)
+
 We also need to have set cloud_provider set to aws in groups_vars/all/all.yml
 
 Now we can run the playbook with the following ansible-playbook command. This will take about 20 minutes to complete.
@@ -23,7 +25,11 @@ I decided to use Spring boot as framework for the application. Application consi
 
 The code is simple, it will listen on /api path and will return the query string to both the browser and the console.
 
+![app](https://i.ibb.co/Kz8P3Gp/2.png)
+
 In our Dockerfile, we have 2 stages. First one is for to build the application with maven. After it builds, in the second stage, we are just running our jar file. Also I added an appuser for the container instead of running it with directly root user.
+
+Dockerfile, application source code and Jenkinsfile can be found at https://github.com/ustundagsemih/spring-app
 
 ## Helm Package
 To make things easier for deploying our application to the cluster, I created a simple helm chart. This chart simply pulls the image from dockerhub, sets replica count to 3 and create an ingress rule.
@@ -40,7 +46,7 @@ To build our image within Jenkis we can use the kaniko project. We need to provi
 
 In the Jenkinsfile we have different stages for building application, building docker image and deploying. Jenkins will spin up containers based on podTemplates specified in the Jenkinsfile. When deploying to Kubernetes, first it deploys to a different namespace named as beta. If app is running fine on that namespace, we can approve the pipeline and let it proceed to deploy to prod namespace. If we have 2 different clusters for beta and prod, we would first push the application to beta and then go with the prod.
 
-# Elasticsearch
+# Elasticsearch and Grafana
 To make fluent-bit send logs to elasticsearch, we need to edit outputs config as below.
 
 ```
@@ -59,6 +65,10 @@ outputs: |
 ```
 
 With these settings we can create index on Elasticsearch to view our logs.
+
+![es](https://i.ibb.co/1Lpy0xk/3.png)
+
+![grafana](https://i.ibb.co/JCYG9vk/4.png)
 
 # Notes
 With some issues, I couldn't have enough time to implement custom metrics for the application via promql client library.
