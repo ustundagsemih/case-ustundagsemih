@@ -82,5 +82,7 @@ For Grafana dashboards I used templates from their website. According to our nee
 
 Beta application: http://app-beta.ustundagsemih.com/api \
 Prod application: http://app.ustundagsemih.com/api \
+(Requests need to be like /api?key=value&env=prod etc)
+
 Kibana: http://kibana.ustundagsemih.com \
 Elasticsearch: http://elasticsearch.ustundagsemih.com
