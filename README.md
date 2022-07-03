@@ -49,6 +49,8 @@ In the Jenkinsfile we have different stages for building application, building d
 The pipeline is also configured for receiving github commits. Whenever a commit made to the app repository, pipeline will be automatically triggered.
 
 # Elasticsearch and Grafana
+I tried to add xpack.security.enabled to Elasticsearch to deployment in order to have authenticated users. I created certificates for this and made the deploy but for some reason it didn't work. I couldn't solve this in time so elasticsearch is now works without authentication. However we can restrict who has access it through firewall.
+
 To make fluent-bit send logs to elasticsearch, we need to edit outputs config as below.
 
 ```
@@ -78,5 +80,7 @@ But the idea is once it is configured in the application code, we just need to s
 
 For Grafana dashboards I used templates from their website. According to our needs, we can populate new dashboards by using Prometheus as our datasource.
 
-Beta application is available at http://app-beta.ustundagsemih.com/api \
-Prod application is available at http://app.ustundagsemih.com/api
+Beta application: http://app-beta.ustundagsemih.com/api \
+Prod application: http://app.ustundagsemih.com/api \
+Kibana: http://kibana.ustundagsemih.com \
+Elasticsearch: http://elasticsearch.ustundagsemih.com
