@@ -1,0 +1,3 @@
+---
+- name: Install tools
+  import_tasks: install_tools.yaml

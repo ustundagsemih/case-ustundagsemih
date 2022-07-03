@@ -1,0 +1,22 @@
+---
+- name: Install ebs-csi driver
+  import_tasks: ebs-csi-driver.yaml
+
+- name: Install nginx-ingress
+  import_tasks: nginx-ingress.yaml
+
+- name: Wait ingress to be ready
+  pause:
+    seconds: 30
+
+- name: Deploy elasticsearch
+  import_tasks: efk.yaml
+
+- name: Deploy prometheus
+  import_tasks: prometheus.yaml
+
+- name: Deploy grafana
+  import_tasks: grafana.yaml
+
+- name: Deploy jenkins
+  import_tasks: jenkins.yaml

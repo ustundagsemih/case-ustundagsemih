@@ -1,0 +1,18 @@
+---
+- name: Add grafana helm repo
+  kubernetes.core.helm_repository:
+    name: grafana 
+    repo_url: "https://grafana.github.io/helm-charts"
+
+- name: Install grafana
+  kubernetes.core.helm:
+    name: grafana
+    chart_ref: grafana/grafana
+    release_namespace: grafana
+    create_namespace: true
+    values:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - grafana.ustundagsemih.com

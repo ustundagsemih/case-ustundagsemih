@@ -1,0 +1,16 @@
+---
+- name: Add ebs-csi-driver helm repository
+  kubernetes.core.helm_repository:
+    name: aws-ebs-csi-driver
+    repo_url: "https://kubernetes-sigs.github.io/aws-ebs-csi-driver"
+
+- name: Install ebs-csi-driver
+  kubernetes.core.helm:
+    name: aws-ebs-csi-driver
+    chart_ref: aws-ebs-csi-driver/aws-ebs-csi-driver
+    release_namespace: kube-system
+
+- name: Create storage class
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('file', '../files/ebs-sc.yaml') | from_yaml }}"

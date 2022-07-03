@@ -1,0 +1,40 @@
+---
+- name: Add elastic helm repo
+  kubernetes.core.helm_repository:
+    name: elastic
+    repo_url: "https://helm.elastic.co"
+
+- name: Add fluent helm repo
+  kubernetes.core.helm_repository:
+    name: fluent
+    repo_url: "https://fluent.github.io/helm-charts"
+
+- name: Install elasticsearch
+  kubernetes.core.helm:
+    name: elasticsearch
+    chart_ref: elastic/elasticsearch
+    release_namespace: elasticsearch
+    create_namespace: true
+    values:
+      replicas: 2
+
+- name: Install kibana
+  kubernetes.core.helm:
+    name: kibana
+    chart_ref: elastic/kibana
+    release_namespace: elasticsearch
+    values:
+      ingress:
+        enabled: true
+        hosts:
+          - host: kibana.ustundagsemih.com
+            paths:
+              - path: /
+
+- name: Install fluentbit
+  kubernetes.core.helm:
+    name: fluent-bit
+    chart_ref: fluent/fluent-bit
+    release_namespace: elasticsearch
+    values_files:
+      - /home/ubuntu/fb-values.yaml
