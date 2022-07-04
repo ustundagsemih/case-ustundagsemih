@@ -1,0 +1,33 @@
+[all]
+ip-10-250-196-71.eu-central-1.compute.internal ansible_host=10.250.196.71
+ip-10-250-199-111.eu-central-1.compute.internal ansible_host=10.250.199.111
+ip-10-250-217-44.eu-central-1.compute.internal ansible_host=10.250.217.44
+ip-10-250-192-114.eu-central-1.compute.internal ansible_host=10.250.192.114
+ip-10-250-220-107.eu-central-1.compute.internal ansible_host=10.250.220.107
+
+bastion ansible_host=3.68.149.57
+
+[bastion]
+bastion ansible_host=3.68.149.57
+
+[kube_control_plane]
+ip-10-250-196-71.eu-central-1.compute.internal
+
+[kube_node]
+ip-10-250-199-111.eu-central-1.compute.internal
+ip-10-250-217-44.eu-central-1.compute.internal
+ip-10-250-192-114.eu-central-1.compute.internal
+ip-10-250-220-107.eu-central-1.compute.internal
+
+[etcd]
+ip-10-250-196-71.eu-central-1.compute.internal
+
+[calico_rr]
+
+[k8s_cluster:children]
+kube_node
+kube_control_plane
+calico_rr
+
+[k8s_cluster:vars]
+apiserver_loadbalancer_domain_name="kubernetes-nlb-devtest-4257f0ec319a7d63.elb.eu-central-1.amazonaws.com"
