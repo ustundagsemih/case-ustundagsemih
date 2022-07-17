@@ -85,5 +85,5 @@ Prod application: http://app.ustundagsemih.com/api \
 (Requests need to be like /api?key=value&env=prod etc)
 
 Kibana: http://kibana.ustundagsemih.com \
-Grafana: http://grafana.ustundagsemih.com
+Grafana: http://grafana.ustundagsemih.com \
 Jenkins: http://jenkins.ustundagsemih.com
